@@ -1,0 +1,141 @@
+.mixed-builder {
+  margin-bottom: 32px;
+  padding: 30px;
+  background: linear-gradient(130deg, var(--surface), var(--nav));
+}
+.mixed-builder h2 {
+  margin-top: 18px;
+  font-size: 1.5rem;
+}
+.mixed-counts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 620px;
+  margin-top: 24px;
+}
+.mixed-counts button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 24px;
+  gap: 7px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+}
+.mixed-counts strong {
+  font-family: Manrope, sans-serif;
+  font-size: 2rem;
+}
+.mixed-counts span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.mixed-counts button.chosen {
+  border-color: var(--accent-dark);
+  box-shadow: 0 0 0 1px var(--accent-dark);
+  background: var(--nav);
+}
+.mixed-summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+  font-size: 0.85rem;
+}
+.mixed-summary span {
+  color: var(--muted);
+}
+.learning-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 25px 0 35px;
+}
+.learning-tabs button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 17px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.learning-tabs button.active {
+  background: var(--button);
+  color: var(--button-text);
+}
+.lesson-card h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+.lesson-card p {
+  font-size: 0.92rem;
+}
+.lesson-example {
+  background: var(--bg);
+  padding: 18px;
+  border-radius: 9px;
+  margin-top: 20px;
+}
+.lesson-example span {
+  font-size: 0.65rem;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  color: var(--accent-dark);
+}
+.lesson-example p {
+  margin: 9px 0 0;
+}
+.learning-action {
+  margin: 28px 0;
+}
+.brand-logo {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+}
+.mixed-pattern-control {
+  margin-bottom: 24px;
+  max-width: 620px;
+}
+.mixed-pattern-control p {
+  font-size: 0.84rem;
+  margin-bottom: 0;
+}
+.reflection-notice {
+  background: var(--nav);
+  padding: 18px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+.reflection-notice p {
+  margin: 0;
+  font-size: 0.86rem;
+}
+@media (max-width: 420px) {
+  .mixed-builder {
+    padding: 22px;
+  }
+  .mixed-counts {
+    gap: 10px;
+  }
+  .mixed-counts button {
+    padding: 16px 13px;
+  }
+  .mixed-counts strong {
+    font-size: 1.7rem;
+  }
+  .mixed-counts span {
+    font-size: 0.74rem;
+  }
+}
+
+.learning-promo {
+  display: block;
+  margin-bottom: 24px;
+}

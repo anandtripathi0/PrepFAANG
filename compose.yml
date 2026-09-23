@@ -1,0 +1,47 @@
+services:
+  backend:
+    build: {context: ., dockerfile: backend/Dockerfile}
+    env_file: .env
+    environment:
+      CODE_RUNNER_URL: http://code-runner:8090
+      # Trust the internal proxy only while the backend has NO published port.
+      FORWARDED_ALLOW_IPS: "*"
+    command: ["sh", "-c", "python -m app.bootstrap && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+  frontend:
+    build: {context: ., dockerfile: frontend/Dockerfile}
+    ports: ["127.0.0.1:5173:8080"]
+    depends_on: [backend]
+  # Dedicated Docker-in-Docker daemon. No host socket or host paths are mounted.
+  # This development topology still needs a privileged daemon; use a dedicated
+  # sandbox VM with stronger isolation before exposing execution to strangers.
+  sandbox-daemon:
+    image: docker:27-dind
+    privileged: true
+    environment: {DOCKER_TLS_CERTDIR: /certs}
+    volumes: ["runner-certs:/certs/client", "sandbox-images:/var/lib/docker"]
+    networks: [sandbox]
+  sandbox-build:
+    image: docker:27-cli
+    profiles: [runner-setup]
+    environment:
+      DOCKER_HOST: tcp://sandbox-daemon:2376
+      DOCKER_TLS_VERIFY: "1"
+      DOCKER_CERT_PATH: /certs/client
+    volumes: ["runner-certs:/certs/client:ro", "./runner:/src/runner:ro"]
+    networks: [sandbox]
+    entrypoint: ["docker", "build", "-t", "prepforge-sandbox:local", "-f", "/src/runner/Dockerfile.sandbox", "/src"]
+  code-runner:
+    build: {context: ., dockerfile: runner/Dockerfile}
+    environment:
+      DOCKER_HOST: tcp://sandbox-daemon:2376
+      DOCKER_TLS_VERIFY: "1"
+      DOCKER_CERT_PATH: /certs/client
+      CODE_RUNNER_TOKEN: ${CODE_RUNNER_TOKEN:?Set CODE_RUNNER_TOKEN in .env}
+    volumes: ["runner-certs:/certs/client:ro"]
+    networks: [default, sandbox]
+    depends_on: [sandbox-daemon]
+volumes:
+  runner-certs:
+  sandbox-images:
+networks:
+  sandbox:

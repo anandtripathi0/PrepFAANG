@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "sample-cache-hit-rate",
+    "type": "mcq",
+    "title": "Cache hit rate",
+    "question": "A cache serves 180 of 240 requests without accessing the origin. What is its hit rate?",
+    "options": ["60%", "65%", "75%", "80%"],
+    "correct_answer": 2,
+    "explanation": "180 divided by 240 is 0.75, or 75%.",
+    "difficulty": "beginner",
+    "topic": "Computer Fundamentals",
+    "tags": ["Caching"],
+    "company_tags": [],
+    "track_tags": [],
+    "estimated_time": 60,
+    "status": "active"
+  }
+]
